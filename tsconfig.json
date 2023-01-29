@@ -8,7 +8,7 @@
         "outDir": "./docs/js/"
     },
     "include": [
-        "**/*", 
+        "src/**/*", 
         "../game.ts"    
     ]
 }
