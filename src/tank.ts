@@ -4,7 +4,7 @@ import { GameObject }       from "./gameobject.js";
 import { Turret }           from "./turret.js";
 import { Vector }           from "./vector.js";
 
-export class Tank extends GameObject{
+export class Tank extends GameObject {
     private readonly FRICTION       : number    = 0.3  
     private readonly ACCELERATION   : number    = 0.2  
 
@@ -12,11 +12,12 @@ export class Tank extends GameObject{
     private turnLeft        : boolean   = false
     private turnRight       : boolean   = false
     private accelerate      : boolean   = false
-    private canFire         : boolean   = false
+    private canFire         : boolean   = true
     private previousState   : boolean   = false
     private rotationSpeed   : number    = 2
     private turret          : Turret
     private game            : Game
+    private fireRate        : number    = 100
     
     protected speed         : Vector    = new Vector(0, 0)
 
@@ -64,12 +65,6 @@ export class Tank extends GameObject{
 
         this.keepInWindow()    
         
-        // Shooting
-        if(this.canFire && !this.previousState) {
-            this.fire()
-            this.previousState = true
-        }
-
         super.update()
     }
 
@@ -79,7 +74,7 @@ export class Tank extends GameObject{
         
         if(e.key == "ArrowUp")          this.accelerate = true
 
-        if(e.key == " ")                this.canFire    = true
+        if(e.key == " ")                this.fire()
     }
     
     private handleKeyUp(e : KeyboardEvent) {
@@ -88,15 +83,18 @@ export class Tank extends GameObject{
 
         if(e.key == "ArrowUp")          this.accelerate = false
 
-        if(e.key == " ")  {
-            this.canFire = false
-            this.previousState = false
-        }    
+        if(e.key == " ")                this.previousState = false    
     }
 
     private fire() {
-        this.game.gameObjects.push(new Bullet(this))
-        console.log("fire")
+        if(this.canFire && !this.previousState) {
+            this.game.gameObjects.push(new Bullet(this))
+            this.previousState = true
+            this.canFire = false
+            
+            // Timer for the fire rate
+            setTimeout(() => { this.canFire = true }, this.fireRate)
+        }
     }
 
     onCollision(target: GameObject): void {
