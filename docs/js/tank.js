@@ -12,9 +12,10 @@ export class Tank extends GameObject {
         this.turnLeft = false;
         this.turnRight = false;
         this.accelerate = false;
-        this.canFire = false;
+        this.canFire = true;
         this.previousState = false;
         this.rotationSpeed = 2;
+        this.fireRate = 100;
         this.speed = new Vector(0, 0);
         this.game = game;
         this.position.x = visualViewport.width / 2;
@@ -50,10 +51,6 @@ export class Tank extends GameObject {
         this.position.x += Math.cos(this.degToRad(this.rotation)) * this.speed.x;
         this.position.y += Math.sin(this.degToRad(this.rotation)) * this.speed.y;
         this.keepInWindow();
-        if (this.canFire && !this.previousState) {
-            this.fire();
-            this.previousState = true;
-        }
         super.update();
     }
     handleKeyDown(e) {
@@ -64,7 +61,7 @@ export class Tank extends GameObject {
         if (e.key == "ArrowUp")
             this.accelerate = true;
         if (e.key == " ")
-            this.canFire = true;
+            this.fire();
     }
     handleKeyUp(e) {
         if (e.key == "ArrowLeft")
@@ -73,14 +70,16 @@ export class Tank extends GameObject {
             this.turnRight = false;
         if (e.key == "ArrowUp")
             this.accelerate = false;
-        if (e.key == " ") {
-            this.canFire = false;
+        if (e.key == " ")
             this.previousState = false;
-        }
     }
     fire() {
-        this.game.gameObjects.push(new Bullet(this));
-        console.log("fire");
+        if (this.canFire && !this.previousState) {
+            this.game.gameObjects.push(new Bullet(this));
+            this.previousState = true;
+            this.canFire = false;
+            setTimeout(() => { this.canFire = true; }, this.fireRate);
+        }
     }
     onCollision(target) {
     }
