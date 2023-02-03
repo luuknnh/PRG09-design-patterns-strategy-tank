@@ -27,9 +27,12 @@ export class Game {
     }
 
     private gameLoop(): void {
+        // Update all game objects
         for (const gameObject of this.gameObjects) {
             gameObject.update()
-
+        }
+        // After update check for collisions
+        for (const gameObject of this.gameObjects) {
             this.checkCollision(gameObject)
         }
 
