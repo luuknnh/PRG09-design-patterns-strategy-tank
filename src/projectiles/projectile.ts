@@ -1,13 +1,13 @@
-import { GameObject }   from "../gameobject.js";
-import { Tank }         from "../tank.js";
-import { Turret }       from "../turret.js";
-import { Vector }       from "../vector.js";
+import { GameObject } from '../gameobject.js';
+import { Tank } from '../tank.js';
+import { Turret } from '../turret.js';
+import { Vector } from '../vector.js';
 
 export abstract class Projectile extends GameObject{
     
     // Field 
     private damage       : number = 15
-    private speed        : number = 10
+    public speed        : number = 10
     private parentTurret : Turret
     private direction    : Vector;
 

@@ -1,5 +1,5 @@
-import { GameObject } from "../gameobject.js";
-import { Vector } from "../vector.js";
+import { GameObject } from '../gameobject.js';
+import { Vector } from '../vector.js';
 export class Projectile extends GameObject {
     get Damage() { return this.damage; }
     get ParentTurret() { return this.parentTurret; }

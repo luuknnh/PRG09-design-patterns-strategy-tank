@@ -68,6 +68,14 @@ missile {
   background-image: url("../images/missile.png");
   background-size: contain;
 }
+homing-missile {
+  /* display:block;
+    position: absolute; */
+  width: 47px;
+  height: 13px;
+  background-image: url("../images/homing-missile.png");
+  background-size: contain;
+}
 
 
 enemy-light {

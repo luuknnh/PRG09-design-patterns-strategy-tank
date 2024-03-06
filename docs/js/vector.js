@@ -41,4 +41,10 @@ export class Vector {
         const yDiff = a.y - b.y;
         return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
     }
+    static add(a, b) {
+        return new Vector(a.x + b.x, a.y + b.y);
+    }
+    static subtract(a, b) {
+        return new Vector(a.x - b.x, a.y - b.y);
+    }
 }
