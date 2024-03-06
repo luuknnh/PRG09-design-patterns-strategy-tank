@@ -1,13 +1,18 @@
 import { Enemy } from './enemy.js';
 import { Game } from './game.js';
 import { GameObject } from './gameobject.js';
-import { Bullet } from './projectiles/bullet.js';
+import { BulletShootStategy } from './strategies/bulletshootstategy.js';
+import { IShootStrategy } from './strategies/IShootStrategy.js';
 import { Turret } from './turret.js';
 import { Vector } from './vector.js';
 
 export class Tank extends GameObject {
     private readonly FRICTION       : number    = 0.3  
     private readonly ACCELERATION   : number    = 0.2  
+    
+
+    // stategy
+    private currentShootStrategy: IShootStrategy
 
     // Fields 
     private turnLeft        : boolean   = false
@@ -17,7 +22,7 @@ export class Tank extends GameObject {
     private previousState   : boolean   = false
     private rotationSpeed   : number    = 2
     private turret          : Turret
-    private game            : Game
+    public game            : Game
     private fireRate        : number    = 100
     private lives           : number    = 1  
     
@@ -38,6 +43,10 @@ export class Tank extends GameObject {
         this.rotation   = 0
         
         this.turret = new Turret(this)
+
+        this.currentShootStrategy = new BulletShootStategy(this);
+
+
 
         window.addEventListener("keydown",  (e : KeyboardEvent) => this.handleKeyDown(e))
         window.addEventListener("keyup",    (e : KeyboardEvent) => this.handleKeyUp(e))
@@ -101,7 +110,9 @@ export class Tank extends GameObject {
 
     private fire() {
         if(this.canFire && !this.previousState) {
-            this.game.gameObjects.push(new Bullet(this))
+            // this.game.gameObjects.push(new Bullet(this))
+            // ! Replace the above line with the following line
+            this.currentShootStrategy.shoot();
             this.previousState = true
             this.canFire = false
             
@@ -118,6 +129,11 @@ export class Tank extends GameObject {
                 this.game.restartGame()
             }
         }
+
+    }
+
+    public changeShootStategy(strategy: IShootStrategy) {
+        this.currentShootStrategy = strategy
     }
 
      public destroy(): void {

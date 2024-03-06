@@ -23,9 +23,8 @@ export class Turret extends GameObject {
     }
 
     public destroy() {
-
     super.destroy();
-}
+    }
 
     onCollision(target: GameObject): void {
         throw new Error("Method not implemented.");

@@ -1,6 +1,6 @@
 import { Enemy } from './enemy.js';
 import { GameObject } from './gameobject.js';
-import { Bullet } from './projectiles/bullet.js';
+import { BulletShootStategy } from './strategies/bulletshootstategy.js';
 import { Turret } from './turret.js';
 import { Vector } from './vector.js';
 export class Tank extends GameObject {
@@ -25,6 +25,7 @@ export class Tank extends GameObject {
         this.speed = new Vector(0, 0);
         this.rotation = 0;
         this.turret = new Turret(this);
+        this.currentShootStrategy = new BulletShootStategy(this);
         window.addEventListener("keydown", (e) => this.handleKeyDown(e));
         window.addEventListener("keyup", (e) => this.handleKeyUp(e));
     }
@@ -89,7 +90,7 @@ export class Tank extends GameObject {
     }
     fire() {
         if (this.canFire && !this.previousState) {
-            this.game.gameObjects.push(new Bullet(this));
+            this.currentShootStrategy.shoot();
             this.previousState = true;
             this.canFire = false;
             setTimeout(() => { this.canFire = true; }, this.fireRate);
@@ -102,6 +103,9 @@ export class Tank extends GameObject {
                 this.game.restartGame();
             }
         }
+    }
+    changeShootStategy(strategy) {
+        this.currentShootStrategy = strategy;
     }
     destroy() {
         super.destroy();

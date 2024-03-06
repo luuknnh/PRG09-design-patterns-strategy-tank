@@ -1,6 +1,8 @@
-import { GameObject }       from "../gameobject.js";
-import { Vector }           from "../vector.js";
-import { Ammunition }       from "./ammunition.js";
+import { GameObject } from '../gameobject.js';
+import { MissileShootStategy } from '../strategies/missileshootstrategy.js';
+import { Tank } from '../tank.js';
+import { Vector } from '../vector.js';
+import { Ammunition } from './ammunition.js';
 
 export class MissileAmmo extends Ammunition {
     constructor(position: Vector) {
@@ -8,6 +10,10 @@ export class MissileAmmo extends Ammunition {
     }
 
     public onCollision(target: GameObject): void {
-        
+      if (target instanceof Tank){
+                target.changeShootStategy(new MissileShootStategy(target))
+
+        console.log("hit")
+      }  
     }
 }
