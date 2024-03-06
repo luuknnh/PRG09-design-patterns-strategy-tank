@@ -1,4 +1,4 @@
-import { Vector } from "./vector.js";
+import { Vector } from './vector.js';
 export class GameObject {
     get Position() { return this.position; }
     get Rotation() { return this.rotation; }
@@ -22,5 +22,8 @@ export class GameObject {
             this.position.y < gameobject.position.y + gameobject.height &&
             this.position.x + this.width > gameobject.position.x &&
             this.position.y + this.height > gameobject.position.y);
+    }
+    destroy() {
+        this.div.remove();
     }
 }

@@ -1,4 +1,4 @@
-import { Vector } from "./vector.js"
+import { Vector } from './vector.js';
 
 export abstract class GameObject{
     // Fields 
@@ -36,6 +36,10 @@ export abstract class GameObject{
                 this.position.y < gameobject.position.y + gameobject.height &&
                 this.position.x + this.width    > gameobject.position.x &&
                 this.position.y + this.height   > gameobject.position.y)
+    }
+
+    public destroy() {
+    this.div.remove()
     }
 
     abstract onCollision(target: GameObject): void

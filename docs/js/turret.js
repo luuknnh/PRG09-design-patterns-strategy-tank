@@ -1,5 +1,5 @@
-import { GameObject } from "./gameobject.js";
-import { Vector } from "./vector.js";
+import { GameObject } from './gameobject.js';
+import { Vector } from './vector.js';
 export class Turret extends GameObject {
     constructor(tank) {
         super("tank-turret");
@@ -11,6 +11,9 @@ export class Turret extends GameObject {
         this.speed = this.tank.Speed;
         this.rotation = this.tank.Rotation;
         super.update();
+    }
+    destroy() {
+        super.destroy();
     }
     onCollision(target) {
         throw new Error("Method not implemented.");

@@ -1,3 +1,4 @@
+import { Enemy } from './enemy.js';
 import { GameObject } from './gameobject.js';
 import { Bullet } from './projectiles/bullet.js';
 import { Turret } from './turret.js';
@@ -16,6 +17,7 @@ export class Tank extends GameObject {
         this.previousState = false;
         this.rotationSpeed = 2;
         this.fireRate = 100;
+        this.lives = 1;
         this.speed = new Vector(0, 0);
         this.game = game;
         this.position.x = visualViewport.width / 2;
@@ -94,6 +96,16 @@ export class Tank extends GameObject {
         }
     }
     onCollision(target) {
+        if (target instanceof Enemy) {
+            this.lives--;
+            if (this.lives == 0) {
+                this.game.restartGame();
+            }
+        }
+    }
+    destroy() {
+        super.destroy();
+        this.turret.destroy();
     }
     keepInWindow() {
         if (this.position.x + this.width < 0)

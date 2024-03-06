@@ -1,3 +1,4 @@
+import { Enemy } from './enemy.js';
 import { Game } from './game.js';
 import { GameObject } from './gameobject.js';
 import { Bullet } from './projectiles/bullet.js';
@@ -18,6 +19,7 @@ export class Tank extends GameObject {
     private turret          : Turret
     private game            : Game
     private fireRate        : number    = 100
+    private lives           : number    = 1  
     
     protected speed         : Vector    = new Vector(0, 0)
 
@@ -109,7 +111,18 @@ export class Tank extends GameObject {
     }
 
     onCollision(target: GameObject): void {
-        // throw new Error("Method not implemented.");
+        if (target instanceof Enemy)
+        {
+            this.lives--
+            if(this.lives == 0) {
+                this.game.restartGame()
+            }
+        }
+    }
+
+     public destroy(): void {
+        super.destroy()
+        this.turret.destroy()
     }
 
     private keepInWindow() {

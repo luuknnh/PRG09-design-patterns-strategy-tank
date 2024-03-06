@@ -1,17 +1,26 @@
-import { Enemy }        from "./enemy.js"
-import { GameObject }   from "./gameobject.js"
-import { Tank }         from "./tank.js"
-import { Vector }       from "./vector.js"
-import { BulletAmmo }   from "./ammo/bulletammo.js"
-import { RocketAmmo }   from "./ammo/rocketammo.js"
-import { MissileAmmo }  from "./ammo/missileammo.js"
+import { BulletAmmo } from './ammo/bulletammo.js';
+import { MissileAmmo } from './ammo/missileammo.js';
+import { RocketAmmo } from './ammo/rocketammo.js';
+import { Enemy } from './enemy.js';
+import { GameObject } from './gameobject.js';
+import { Tank } from './tank.js';
+import { Vector } from './vector.js';
 
 export class Game {
 
     // Fields 
     public gameObjects: GameObject[] = []
 
-    constructor() {
+        constructor() {
+        this.restartGame()
+        this.gameLoop()
+    }
+
+       public restartGame() {
+        for (let gameObject of this.gameObjects) {
+            gameObject.destroy()
+        }
+        this.gameObjects = []
         this.gameObjects.push(new BulletAmmo(new Vector(800, 200)))
         this.gameObjects.push(new RocketAmmo(new Vector(500, 200)))
         this.gameObjects.push(new MissileAmmo(new Vector(500, 500)))
@@ -22,9 +31,22 @@ export class Game {
         this.gameObjects.push(new Enemy(this, "enemy-light", new Vector(50, 50), tank))
         this.gameObjects.push(new Enemy(this, "enemy-medium", new Vector(visualViewport.width - 50, visualViewport.height - 50), tank))
         this.gameObjects.push(new Enemy(this, "enemy-heavy", new Vector(0, visualViewport.height - 50), tank))
-        
-        this.gameLoop()
     }
+
+    // constructor() {
+    //     this.gameObjects.push(new BulletAmmo(new Vector(800, 200)))
+    //     this.gameObjects.push(new RocketAmmo(new Vector(500, 200)))
+    //     this.gameObjects.push(new MissileAmmo(new Vector(500, 500)))
+        
+    //     let tank = new Tank(this)
+    //     this.gameObjects.push(tank)
+        
+    //     this.gameObjects.push(new Enemy(this, "enemy-light", new Vector(50, 50), tank))
+    //     this.gameObjects.push(new Enemy(this, "enemy-medium", new Vector(visualViewport.width - 50, visualViewport.height - 50), tank))
+    //     this.gameObjects.push(new Enemy(this, "enemy-heavy", new Vector(0, visualViewport.height - 50), tank))
+        
+    //     this.gameLoop()
+    // }
 
     private gameLoop(): void {
         // Update all game objects
@@ -53,4 +75,7 @@ export class Game {
     }
 }
 
+
+
 window.addEventListener("DOMContentLoaded", () => new Game())
+
