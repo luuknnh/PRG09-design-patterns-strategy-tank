@@ -40,7 +40,8 @@ export class HomingMissile extends Projectile {
     /**
  * Updates the position and orientation of the Homing Missile based on its current target.
  * If there is a target, it calculates the direction towards that target, adjusts the missile's position based on its speed,
- * an
+ * and updates the missile's visual representation with the new position and rotation.
+ */
 public update(): void {
 
     if (this.target) {
