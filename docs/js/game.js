@@ -20,6 +20,8 @@ export class Game {
     gameLoop() {
         for (const gameObject of this.gameObjects) {
             gameObject.update();
+        }
+        for (const gameObject of this.gameObjects) {
             this.checkCollision(gameObject);
         }
         requestAnimationFrame(() => this.gameLoop());

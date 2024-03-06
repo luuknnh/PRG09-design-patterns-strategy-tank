@@ -1,7 +1,7 @@
-import { Bullet } from "./projectiles/bullet.js";
-import { GameObject } from "./gameobject.js";
-import { Turret } from "./turret.js";
-import { Vector } from "./vector.js";
+import { GameObject } from './gameobject.js';
+import { Bullet } from './projectiles/bullet.js';
+import { Turret } from './turret.js';
+import { Vector } from './vector.js';
 export class Tank extends GameObject {
     get Speed() { return this.speed; }
     get Turret() { return this.turret; }
@@ -58,7 +58,13 @@ export class Tank extends GameObject {
             this.turnLeft = true;
         else if (e.key == "ArrowRight")
             this.turnRight = true;
+        if (e.key == "a")
+            this.turnLeft = true;
+        else if (e.key == "d")
+            this.turnRight = true;
         if (e.key == "ArrowUp")
+            this.accelerate = true;
+        if (e.key == "w")
             this.accelerate = true;
         if (e.key == " ")
             this.fire();
@@ -68,7 +74,13 @@ export class Tank extends GameObject {
             this.turnLeft = false;
         else if (e.key == "ArrowRight")
             this.turnRight = false;
+        if (e.key == "a")
+            this.turnLeft = false;
+        else if (e.key == "d")
+            this.turnRight = false;
         if (e.key == "ArrowUp")
+            this.accelerate = false;
+        if (e.key == "w")
             this.accelerate = false;
         if (e.key == " ")
             this.previousState = false;
