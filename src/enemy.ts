@@ -1,10 +1,10 @@
-import { Game }         from "./game.js";
-import { GameObject }   from "./gameobject.js";
-import { Bullet }       from "./projectiles/bullet.js";
-import { Missile }      from "./projectiles/missile.js";
-import { Rocket }       from "./projectiles/rocket.js";
-import { Tank }         from "./tank.js";
-import { Vector }       from "./vector.js";
+import { Game } from './game.js';
+import { GameObject } from './gameobject.js';
+import { Bullet } from './projectiles/bullet.js';
+import { Missile } from './projectiles/missile.js';
+import { Rocket } from './projectiles/rocket.js';
+import { Tank } from './tank.js';
+import { Vector } from './vector.js';
 
 export class Enemy extends GameObject {
     
@@ -13,6 +13,7 @@ export class Enemy extends GameObject {
     private game: Game
     private player: Tank
     private type: string
+    public position: Vector
 
     constructor(game: Game, type: string, position: Vector, player: Tank) {
         super(type)

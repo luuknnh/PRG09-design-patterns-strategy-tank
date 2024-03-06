@@ -36,4 +36,9 @@ export class Vector {
         let diff = target.Position.difference(this);
         return diff.normalize();
     }
+    static distance(a, b) {
+        const xDiff = a.x - b.x;
+        const yDiff = a.y - b.y;
+        return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+    }
 }

@@ -1,4 +1,5 @@
 import { BulletAmmo } from './ammo/bulletammo.js';
+import { HomingMissileAmmo } from './ammo/homingmissleammo.js';
 import { MissileAmmo } from './ammo/missileammo.js';
 import { RocketAmmo } from './ammo/rocketammo.js';
 import { Enemy } from './enemy.js';
@@ -18,6 +19,7 @@ export class Game {
         this.gameObjects.push(new BulletAmmo(new Vector(800, 200)));
         this.gameObjects.push(new RocketAmmo(new Vector(500, 200)));
         this.gameObjects.push(new MissileAmmo(new Vector(500, 500)));
+        this.gameObjects.push(new HomingMissileAmmo(new Vector(800, 500)));
         let tank = new Tank(this);
         this.gameObjects.push(tank);
         this.gameObjects.push(new Enemy(this, "enemy-light", new Vector(50, 50), tank));

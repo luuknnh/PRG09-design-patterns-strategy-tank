@@ -1,4 +1,4 @@
-import { GameObject } from "./gameobject.js"
+import { GameObject } from './gameobject.js';
 
 export class Vector{
     // Fields
@@ -66,5 +66,11 @@ export class Vector{
         // Calculate new Direction (enemy to player)
         let diff = target.Position.difference(this)
         return diff.normalize()
+    }
+
+    public static distance(a: Vector, b: Vector): number {
+        const xDiff = a.x - b.x;
+        const yDiff = a.y - b.y;
+        return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
     }
 }

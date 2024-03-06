@@ -69,6 +69,7 @@ missile {
   background-size: contain;
 }
 
+
 enemy-light {
   /* display:block;
     position: absolute; */
@@ -121,6 +122,14 @@ ammo-missile {
   background-size: contain;
   background-repeat: no-repeat;
   background-image: url("../images/ammobox3.png");
+}
+
+ammo-homing-missile {
+  width: 32px;
+  height: 38px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("../images/ammobox4.png");
 }
 
 /* ammo,

@@ -1,7 +1,7 @@
-import { GameObject } from "./gameobject.js";
-import { Bullet } from "./projectiles/bullet.js";
-import { Missile } from "./projectiles/missile.js";
-import { Rocket } from "./projectiles/rocket.js";
+import { GameObject } from './gameobject.js';
+import { Bullet } from './projectiles/bullet.js';
+import { Missile } from './projectiles/missile.js';
+import { Rocket } from './projectiles/rocket.js';
 export class Enemy extends GameObject {
     constructor(game, type, position, player) {
         super(type);
