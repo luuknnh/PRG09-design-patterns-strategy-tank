@@ -20,7 +20,6 @@ export class HomingMissile extends Projectile {
             }
         });
         this.target = closestEnemy;
-        console.log(`Target found at distance ${closestDistance}`);
     }
     update() {
         if (this.target) {

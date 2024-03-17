@@ -111,7 +111,7 @@ export class Tank extends GameObject {
     private fire() {
         if(this.canFire && !this.previousState) {
             // this.game.gameObjects.push(new Bullet(this))
-            // ! Replace the above line with the following line
+            // ! Replace the line above line with the following line
             this.currentShootStrategy.shoot();
             this.previousState = true
             this.canFire = false

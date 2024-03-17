@@ -68,17 +68,37 @@ export class Vector{
         return diff.normalize()
     }
 
+    /**
+     * Calculate the distance between two vectors.
+     * @param a - The first vector.
+     * @param b - The second vector.
+     * @returns The distance between the two vectors.
+     */
     public static distance(a: Vector, b: Vector): number {
         const xDiff = a.x - b.x;
         const yDiff = a.y - b.y;
         return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
     }
 
+    
+    /**
+     * Add two vectors together.
+     * @param a - The first vector.
+     * @param b - The second vector.
+     * @returns A new vector that is the result of adding the two input vectors.
+     */
     public static add(a: Vector, b: Vector): Vector {
     return new Vector(a.x + b.x, a.y + b.y);
     }
 
+    /**
+     * Subtract one vector from another.
+     * @param a - The vector to subtract from.
+     * @param b - The vector to subtract.
+     * @returns A new vector that is the result of subtracting the second vector from the first.
+     */
     public static subtract(a: Vector, b: Vector): Vector {
         return new Vector(a.x - b.x, a.y - b.y);
     }
+
 }
